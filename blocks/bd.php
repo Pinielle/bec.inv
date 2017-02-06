@@ -1,4 +1,4 @@
 <?php
-    $db = mysql_connect("localhost", "root", "root");
-    mysql_select_db("bec_inv",$db);
+    $db = mysql_connect($config['db']['host'], $config['db']['user'], $config['db']['passw']);
+    mysql_select_db($config['db']['name'],$db);
 ?>

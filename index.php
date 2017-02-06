@@ -1,5 +1,15 @@
 <?php
-
+$configFiles = glob('protected/config/config.*');
+sort($configFiles, 1);
+$config = array();
+foreach ($configFiles as $configFile) {
+    if (is_file($configFile) && is_readable($configFile)) {
+        $configTmp = include $configFile;
+        if (is_array($configTmp)) {
+            $config = array_merge($config, $configTmp);
+        }
+    }
+}
 include ("blocks/bd.php");
 $result = mysql_query("SELECT title,text FROM settings WHERE page='index'",$db);
 
