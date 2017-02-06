@@ -1,0 +1,1 @@
+<td width="690" height="20" class="footer">Babenko Commerce (c) 2017</td>
