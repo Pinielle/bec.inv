@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/bec.inv.iml" filepath="$PROJECT_DIR$/.idea/bec.inv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../tinymvc.ru/.idea/tinymvc.ru.iml" filepath="$PROJECT_DIR$/../tinymvc.ru/.idea/tinymvc.ru.iml" />
     </modules>
   </component>
 </project>
