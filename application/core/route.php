@@ -10,7 +10,7 @@ class Route
 
     static function start()
     {
-
+        echo 'Главная страница сайта';
 
     }
 
