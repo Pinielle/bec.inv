@@ -1,8 +1,8 @@
 <html>
-    <head>
+<head>
 
-    </head>
-    <body>
+</head>
+<body>
 
-    </body>
+</body>
 </html>

@@ -5,7 +5,8 @@
  * Date: 13.02.17
  * Time: 12:27
  */
-    class Inventory extends Controller{
+    class Inventory extends Controller
+    {
 
         /**
          * @var Inventory_model
