@@ -1,8 +1,8 @@
-<html>
-<head>
+<?php
+    class View
+    {
+        function generate ()
+        {
 
-</head>
-<body>
-
-</body>
-</html>
+        }
+    }

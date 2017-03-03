@@ -3,6 +3,4 @@
         <title>Head</title>
     </head>
     <body>
-        <h1>BabenkoECommerce</h1>
-    </body>
-</html>
+    <p><h1>BabenkoECommerce</h1></p>
