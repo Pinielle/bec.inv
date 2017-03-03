@@ -7,52 +7,63 @@
 
 class Route
 {
+    /** define default controller name */
+    const DEFAULT_CONTROLLER_NAME = 'Index';
 
+    /** define default action name */
+    const DEFAULT_ACTION_NAME = 'Index';
+
+
+    /**
+     * Main route logic
+     */
     static function start()
     {
-
-        $controller_name = 'Main';
-        $action_name = 'Index';
+        $controllerName = null;
+        $actionName     = null;
 
         /** TODO: $routes Removing first empty array element, maybe should refactored. Temporary solution. */
         $routes = array_diff(explode('/', $_SERVER['REQUEST_URI']), array('', NULL, false));
 
-        // получаем имя контроллера
+        /** get controller name */
         if (!empty($routes[1])) {
-            $controller_name = $routes[1];
+            $controllerName = $routes[1];
+        } else {
+            $controllerName = self::DEFAULT_CONTROLLER_NAME;
         }
 
-        // получаем имя экшена
+        /** get action name */
         if (!empty($routes[2])) {
-            $action_name = $routes[2];
+            $actionName = $routes[2];
+        } else {
+            $actionName = self::DEFAULT_ACTION_NAME;
         }
 
-            // добавляем префиксы
-            $model_name = 'Model_'.$controller_name;
-            $controller_name = 'Controller_'.$controller_name;
-            $action_name = $action_name.'Action';
+        /** Add Prefixes */
+        $modelName = 'Model_' . $controllerName;
+        $controllerName = 'Controller_' . $controllerName;
+        $actionName = $actionName . 'Action';
 
 
-            $model_file = strtolower($model_name).'.php';
-            $model_path = "application/models/".$model_file;
+        $modelFile = strtolower($modelName) . '.php';
+        $model_path = "application/models/" . $modelFile;
 
-            if(file_exists($model_path))
-            {
-                include "application/models/".$model_file;
-            }
-            // подцепляем файл с классом контроллера
-            $controller_file = strtolower($controller_name) . '.php';
-            $controller_path = "application/controllers/" . $controller_file;
+        if (file_exists($model_path)) {
+            include "application/models/" . $modelFile;
+        }
+        /** @var  $controller_file Controller class file */
+        $controllerFile = strtolower($controllerName) . '.php';
+        $controllerPath = "application/controllers/" . $controllerFile;
 
-            if (file_exists($controller_path)) {
-                include "application/controllers/" . $controller_file;
+        if (file_exists($controllerPath)) {
+            include "application/controllers/" . $controllerFile;
         } else {
             $errorText = "File not exist";
             Route::ErrorPage404($errorText);
         }
 
-        $controller = new $controller_name;
-        $action = $action_name;
+        $controller = new $controllerName;
+        $action = $actionName;
 
 
         if (method_exists($controller, $action)) {
@@ -69,11 +80,7 @@ class Route
      */
     function ErrorPage404($errorText = null)
     {
-        $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';
         print_r($errorText);
-        header('HTTP/1.1 404 Not Found');
-        header("Status: 404 Not Found");
-        header('Location:' . $host . '404');
     }
 
 }

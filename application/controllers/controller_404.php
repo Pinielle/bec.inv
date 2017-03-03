@@ -3,9 +3,9 @@
 class Controller_404 extends Controller
 {
 
-    function action_index()
+    function indexAction()
     {
-        echo 'Error';
+        echo 'Bad request';
     }
 
 }

@@ -9,12 +9,12 @@
 class DataBase
 {
 
-    public $db;
+    public $_db;
 
-    public function getDB()
+    public function getDb()
     {
-        $db = mysql_connect("localhost", "root", "root");
-        mysql_select_db("bec_inv", $db);
-        return $this->db;
+        $this->_db = mysql_connect("localhost", "root", "root");
+        mysql_select_db("bec_inv", $this->_db);
+        return $this->_db;
     }
 }

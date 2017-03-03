@@ -8,17 +8,17 @@
  */
 class Model
 {
-    protected $tablename;
-    protected $dbConnection;
+    protected $_tableName;
+    protected $_dbConnection;
 
     public function __construct()
     {
         $dbModel = new DataBase();
-        $this->dbConnection = $dbModel->getDB();
+        $this->_dbConnection = $dbModel->getDB();
     }
 
     public function getTableName()
     {
-        return $this->tablename;
+        return $this->_tableName;
     }
 }

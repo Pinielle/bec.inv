@@ -9,6 +9,6 @@ class Controller_Login extends Controller
 {
     public function indexAction()
     {
-
+        echo 'Login Action';
     }
 }
