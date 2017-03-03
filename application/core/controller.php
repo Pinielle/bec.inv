@@ -22,10 +22,10 @@ class Controller
         print_r('Core Controller Index Action');
     }
 
-    public function renderLayout()
+    public function renderLayoutTemplates()
     {
-        $this->_helperModel->getViewModel()->render('header');
-        $this->_helperModel->getViewModel()->render('footer');
+        $this->_helperModel->getViewModel()->renderTemplate('header');
+        $this->_helperModel->getViewModel()->renderTemplate('footer');
     }
 
 }

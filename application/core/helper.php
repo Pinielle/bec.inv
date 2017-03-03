@@ -13,4 +13,24 @@ class Helper
         return new View();
     }
 
+    public function getSkinDirectoryPath()
+    {
+        return $this->getRootDirPath(). 'skins/';
+    }
+
+    /**
+     * Return root directory path
+     *
+     * @return string
+     */
+    public function getRootDirPath()
+    {
+        return $_SERVER['DOCUMENT_ROOT'];
+    }
+
+    public function getConfigModel()
+    {
+        return new Config();
+    }
+
 }

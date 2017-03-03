@@ -13,6 +13,6 @@ class Controller_Index extends Controller
      */
     public function indexAction()
     {
-        $this->renderLayout();
+        $this->renderLayoutTemplates();
     }
 }
