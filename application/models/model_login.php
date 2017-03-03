@@ -6,7 +6,7 @@
  * Date: 13.02.17
  * Time: 12:40
  */
-class Inventory_model extends Model
+class Model_Login extends Model
 {
     public function getCustomer()
     {

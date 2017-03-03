@@ -13,11 +13,10 @@ class Route
     /** define default action name */
     const DEFAULT_ACTION_NAME = 'Index';
 
-
     /**
      * Main route logic
      */
-    static function start()
+    static function run()
     {
         $controllerName = null;
         $actionName     = null;

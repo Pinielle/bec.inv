@@ -8,19 +8,24 @@
  */
 class Controller
 {
-    public $model;
-    public $view;
+    /** Defined by default in __construct */
+    public $_helperModel;
 
-    function __construct()
+    public function __construct()
     {
-        $this->view = new View();
+        /** Define helper Model */
+        $this->_helperModel = new Helper();
     }
 
     function indexAction()
     {
-        /**
-         * TODO
-         */
+        print_r('Core Controller Index Action');
+    }
+
+    public function renderLayout()
+    {
+        $this->_helperModel->getViewModel()->render('header');
+        $this->_helperModel->getViewModel()->render('footer');
     }
 
 }
