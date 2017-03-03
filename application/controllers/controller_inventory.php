@@ -16,7 +16,7 @@
         function __construct()
         {
             $this->model = new Inventory_model();
-            $this->view->generate('inventory_view.php','template_view.php');
+            $this->view->generate('header.php');
             parent::__construct();
         }
 
