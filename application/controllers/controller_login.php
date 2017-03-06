@@ -9,6 +9,10 @@ class Controller_Login extends Controller
 {
     public function indexAction()
     {
-        echo 'Login Action';
+        $this->_helperModel->getViewModel()->renderTemplate('header');
+        $this->_helperModel->getViewModel()->renderTemplate('login');
+        $this->_helperModel->getViewModel()->renderTemplate('footer');
     }
+
+
 }

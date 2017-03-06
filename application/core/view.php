@@ -17,7 +17,7 @@ class View
      * @param null $view
      * @param string $defaultTemplate
      */
-    function renderTemplate($view = null, $defaultTemplate = 'default')
+    public function renderTemplate($view = null, $defaultTemplate = 'default')
     {
         $themePrefix  = 'theme_';
         $mustRendered = null;
@@ -34,9 +34,15 @@ class View
         include $themePath.'/templates/' . $mustRendered;
     }
 
+
     public function getUsedTheme()
     {
        return $this->_helperModel->getConfigModel()->getThemeName();
+    }
+
+    public function getSearchForm()
+    {
+        $this->_helperModel->getViewModel()->renderTemplate('search');
     }
 
 }
