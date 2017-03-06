@@ -7,7 +7,7 @@
  */
 class Connector
 {
-    public function indexAction
+    public function indexAction()
     {
         $server = "localhost";
         $user = "root";
