@@ -13,7 +13,9 @@ class Controller_Index extends Controller
      */
     public function indexAction()
     {
-        $this->renderLayoutTemplates();
+        $this->_helperModel->getViewModel()->renderTemplate('header');
+        $this->_helperModel->getViewModel()->renderTemplate('index');
+        $this->_helperModel->getViewModel()->renderTemplate('footer');
 
     }
 }

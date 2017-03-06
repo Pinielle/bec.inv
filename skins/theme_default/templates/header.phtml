@@ -2,13 +2,10 @@
 <html lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Babenko eCommerce Header - DEFAULT THEME</title>
+    <link rel="stylesheet" href="<?php echo $this->getThemeCssPath() ?>style.css">
+    <title>Babenko eCommerce Inventory Portal</title>
 </head>
 <body>
-<h1>Babenko eCommerce Header </h1>
-<?php if (true) : ?>
-    <?php echo $this->getSearchForm(); ?>
-<?php endif; ?>
+<div class="centered-text"><h1>Babenko eCommerce Inventory Portal</h1></div>
+<div class="navigation"><?php echo $this->renderTemplate('navigation'); ?></div>
 
-
-<p>Some content header content</p>

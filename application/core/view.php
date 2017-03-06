@@ -5,6 +5,9 @@ class View
     /** Defined by default in __construct */
     public $_helperModel;
 
+    /** theme prefix. Not sure that it needed  in future */
+    const THEME_PREFIX  = 'theme_';
+
     public function __construct()
     {
         /** Define helper Model */
@@ -19,9 +22,16 @@ class View
      */
     public function renderTemplate($view = null, $defaultTemplate = 'default')
     {
-        $themePrefix  = 'theme_';
         $mustRendered = null;
-        $themePath    = $this->_helperModel->getSkinDirectoryPath() . $themePrefix . $this->getUsedTheme();
+
+        /** check if custom theme set in admin */
+        if($this->getUsedTheme()) {
+            $usedTheme = $this->getUsedTheme();
+        } else {
+            $usedTheme = 'default';
+        }
+
+        $themePath = $this->_helperModel->getSkinDirectoryPath() . self::THEME_PREFIX . $usedTheme;
 
         if (!is_string($view) || !$view) {
             $mustRendered = $defaultTemplate;
@@ -35,14 +45,47 @@ class View
     }
 
 
+    /**
+     * Get currently used theme. Shuld configure in admin (nearest future)
+     *
+     * @return string
+     */
     public function getUsedTheme()
     {
        return $this->_helperModel->getConfigModel()->getThemeName();
     }
 
-    public function getSearchForm()
+    /**
+     * Get currently used theme CSS folder
+     *
+     * @return string
+     */
+    public function getThemeCssPath()
     {
-        $this->_helperModel->getViewModel()->renderTemplate('search');
+        /** check if custom theme set in admin */
+        if($this->getUsedTheme()) {
+            $usedTheme = $this->getUsedTheme();
+        } else {
+            $usedTheme = 'default';
+        }
+
+        return '/skins/'. self::THEME_PREFIX . $usedTheme. '/css/';
     }
 
+    /**
+     * Get currently used theme JS folder
+     *
+     * @return string
+     */
+    public function getThemeJsPath()
+    {
+        /** check if custom theme set in admin */
+        if($this->getUsedTheme()) {
+            $usedTheme = $this->getUsedTheme();
+        } else {
+            $usedTheme = 'default';
+        }
+
+        return '/skins/'. self::THEME_PREFIX . $usedTheme. '/js/';
+    }
 }
