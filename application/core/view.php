@@ -83,7 +83,6 @@ class View
 
     public function getFormAction()
     {
-        return $_SERVER['REDIRECT_URL'];
 
     }
 }

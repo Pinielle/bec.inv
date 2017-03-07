@@ -12,4 +12,14 @@ class Model_Login extends Model
     {
         return "public function getCustomer()";
     }
+
+    public function getPost()
+    {
+        return $_POST;
+    }
+
+    public function isUserLoggedIn()
+    {
+
+    }
 }

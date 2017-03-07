@@ -13,4 +13,14 @@ class Controller
     {
     }
 
+    protected function getPostAction()
+    {
+        return $_POST;
+    }
+
+    public function getPostData($data)
+    {
+        return Runner::getPostData($data);
+    }
+
 }
