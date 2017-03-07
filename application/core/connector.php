@@ -11,7 +11,7 @@ class Connector
     {
         $server = "localhost";
         $user = "root";
-        $pass = "root";
+        $pass = "mul2ler0";
         $database = "bec_inv";
 
         $connectbd = mysql_connect($server,$user,$pass);

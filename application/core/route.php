@@ -18,11 +18,11 @@ class Route
      */
     static function run()
     {
-        $controllerName = null;
-        $actionName     = null;
-
         /** TODO: $routes Removing first empty array element, maybe should refactored. Temporary solution. */
-        $routes = array_diff(explode('/', $_SERVER['REQUEST_URI']), array('', NULL, false));
+
+        if(isset($_SERVER['REDIRECT_URL'])) {
+            $routes = array_diff(explode('/', $_SERVER['REDIRECT_URL']), array('', NULL, false));
+        }
 
         /** get controller name */
         if (!empty($routes[1])) {
@@ -39,9 +39,9 @@ class Route
         }
 
         /** Add Prefixes */
-        $modelName = 'Model_' . $controllerName;
+        $modelName      = 'Model_' . $controllerName;
         $controllerName = 'Controller_' . $controllerName;
-        $actionName = $actionName . 'Action';
+        $actionName     = $actionName . 'Action';
 
 
         $modelFile = strtolower($modelName) . '.php';
@@ -57,29 +57,19 @@ class Route
         if (file_exists($controllerPath)) {
             include "application/controllers/" . $controllerFile;
         } else {
-            $errorText = "File not exist";
-            Route::ErrorPage404($errorText);
+            Runner::coreException("Routed file not exist");
         }
 
-        $controller = new $controllerName;
-        $action = $actionName;
-
+        $controller = Runner::getInstance($controllerName);
+        $action     = $actionName;
 
         if (method_exists($controller, $action)) {
             $controller->$action();
-
         } else {
-            $errorText = "Requested controller method not exist";
-            Route::ErrorPage404($errorText);
+            Runner::coreException("Requested controller method not exist");
         }
     }
 
-    /**
-     * @param null $errorText
-     */
-    function ErrorPage404($errorText = null)
-    {
-        print_r($errorText);
-    }
+
 
 }

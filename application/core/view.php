@@ -2,57 +2,44 @@
 
 class View
 {
-    /** Defined by default in __construct */
-    public $_helperModel;
-
     /** theme prefix. Not sure that it needed  in future */
     const THEME_PREFIX  = 'theme_';
 
-    public function __construct()
-    {
-        /** Define helper Model */
-        $this->_helperModel = new Helper();
-    }
-
     /**
-     * Basic render method
-     *
-     * @param null $view
-     * @param string $defaultTemplate
+     * Render Template file via path
+     * @param string $template
      */
-    public function renderTemplate($view = null, $defaultTemplate = 'default')
+    public function renderTemplate($template = '')
     {
-        $mustRendered = null;
+      include $this->getTemplate($template);
+    }
 
-        /** check if custom theme set in admin */
-        if($this->getUsedTheme()) {
-            $usedTheme = $this->getUsedTheme();
-        } else {
-            $usedTheme = 'default';
+    public function getTemplate($template = '')
+    {
+        if (!$template) {
+            Runner::coreException('Template name must be specified');
+            die();
         }
 
-        $themePath = $this->_helperModel->getSkinDirectoryPath() . self::THEME_PREFIX . $usedTheme;
+        $themePath = Runner::getInstance('Helper')->getSkinDirectoryPath() . self::THEME_PREFIX . 'default';
 
-        if (!is_string($view) || !$view) {
-            $mustRendered = $defaultTemplate;
-        } else {
-            $mustRendered = $view;
+        if(!file_exists($themePath.'/templates/' . $template.'.phtml')) {
+            Runner::coreException('Template file not exits');
+            die();
         }
 
-        $mustRendered = $mustRendered . '.phtml';
-
-        include $themePath.'/templates/' . $mustRendered;
+        return $themePath.'/templates/' . $template.'.phtml';
     }
 
 
     /**
-     * Get currently used theme. Shuld configure in admin (nearest future)
+     * Get currently used theme. Should configure in admin (nearest future)
      *
      * @return string
      */
     public function getUsedTheme()
     {
-       return $this->_helperModel->getConfigModel()->getThemeName();
+       return Runner::getInstance('Config')->getThemeName();
     }
 
     /**
@@ -87,5 +74,16 @@ class View
         }
 
         return '/skins/'. self::THEME_PREFIX . $usedTheme. '/js/';
+    }
+
+    public function getCopyright()
+    {
+        return Runner::getCopyright();
+    }
+
+    public function getFormAction()
+    {
+        return $_SERVER['REDIRECT_URL'];
+
     }
 }

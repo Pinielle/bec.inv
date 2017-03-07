@@ -9,10 +9,13 @@ class Controller_Login extends Controller
 {
     public function indexAction()
     {
-        $this->_helperModel->getViewModel()->renderTemplate('header');
-        $this->_helperModel->getViewModel()->renderTemplate('login');
-        $this->_helperModel->getViewModel()->renderTemplate('footer');
+        Runner::getInstance('View')->renderTemplate('header');
+        Runner::getInstance('View')->renderTemplate('login');
+        Runner::getInstance('View')->renderTemplate('footer');
     }
 
+    public function postAction()
+    {
 
+    }
 }

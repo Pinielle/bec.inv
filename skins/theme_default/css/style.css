@@ -164,12 +164,10 @@ span.psw {
     overflow: hidden;
     background-color: #333;
     text-align: center;
-
 }
 
 .navigation li {
     display: inline-block;
-
 }
 
 .navigation li a {
@@ -188,3 +186,11 @@ span.psw {
     background-color: #4CAF50;
 }
 /* =============== END NAVIGATION STYLES ============== */
+
+.content {
+    max-width: 1096px;
+    padding: 10px;
+    margin: 5px;
+    height: 700px;
+    border: 1px dotted #000000;
+}
