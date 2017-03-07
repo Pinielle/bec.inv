@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Класс-маршрутизатор для определения запрашиваемой страницы. цепляет классы контроллеров и моделей.
- * Создает экземпляры контролеров страниц и вызывает действия этих контроллеров.
+ * Main router class
+ * Class create requested controller instance and call them action
  */
 
 class Route
@@ -13,17 +13,57 @@ class Route
     /** define default action name */
     const DEFAULT_ACTION_NAME = 'Index';
 
-    /**
-     * Main route logic
-     */
-    static function run()
-    {
-        /** TODO: $routes Removing first empty array element, maybe should refactored. Temporary solution. */
+    /** default controller path */
+    const CONTROLLERS_PATH = 'application/controllers/';
 
-        if(isset($_SERVER['REDIRECT_URL'])) {
-            $routes = array_diff(explode('/', $_SERVER['REDIRECT_URL']), array('', NULL, false));
+    /**
+     * Main route method
+     *
+     * @throws Runner coreException
+     */
+   public static function run()
+    {
+        $routes = array();
+
+        if(Route::isRedirect()) {
+            $routes = Route::parseRequest();
         }
 
+        /** @var  $controller_file Controller class file */
+        $controllerFile = strtolower(Route::setRequestController($routes)) . '.php';
+        $controllerPath = self::CONTROLLERS_PATH . $controllerFile;
+
+        if (Route::isControllerExist($controllerPath)) {
+            include self::CONTROLLERS_PATH . $controllerFile;
+        } else {
+            Runner::coreException("Routed file not exist");
+        }
+
+        /** Finally Call controller Action */
+        Route::callControllerMethod(
+            Runner::getInstance(Route::setRequestController($routes)),
+            Route::setControllerAction($routes)
+        );
+    }
+
+    /**
+     * Check if redirect exist
+     *
+     * @return bool
+     */
+    public static function isRedirect()
+    {
+       return isset($_SERVER['REDIRECT_URL']);
+    }
+
+    /**
+     * Check and return routed Controller name
+     *
+     * @param $routes
+     * @return string
+     */
+    public static function setRequestController($routes)
+    {
         /** get controller name */
         if (!empty($routes[1])) {
             $controllerName = $routes[1];
@@ -31,38 +71,46 @@ class Route
             $controllerName = self::DEFAULT_CONTROLLER_NAME;
         }
 
+        return 'Controller_' . $controllerName;
+    }
+
+    /**
+     * Check and return routed Controller Action
+     *
+     * @param $routes
+     * @return string
+     */
+    public static function setControllerAction($routes)
+    {
         /** get action name */
         if (!empty($routes[2])) {
-            $actionName = $routes[2];
+            $controllerAction = $routes[2];
         } else {
-            $actionName = self::DEFAULT_ACTION_NAME;
+            $controllerAction = self::DEFAULT_ACTION_NAME;
         }
 
-        /** Add Prefixes */
-        $modelName      = 'Model_' . $controllerName;
-        $controllerName = 'Controller_' . $controllerName;
-        $actionName     = $actionName . 'Action';
+        return $controllerAction . 'Action';
+    }
 
+    /**
+     * Parse Requested Route string
+     *
+     * @return array
+     */
+    public static function parseRequest()
+    {
+        return array_diff(explode('/', $_SERVER['REDIRECT_URL']), array('', NULL, false));
+    }
 
-        $modelFile = strtolower($modelName) . '.php';
-        $model_path = "application/models/" . $modelFile;
-
-        if (file_exists($model_path)) {
-            include "application/models/" . $modelFile;
-        }
-        /** @var  $controller_file Controller class file */
-        $controllerFile = strtolower($controllerName) . '.php';
-        $controllerPath = "application/controllers/" . $controllerFile;
-
-        if (file_exists($controllerPath)) {
-            include "application/controllers/" . $controllerFile;
-        } else {
-            Runner::coreException("Routed file not exist");
-        }
-
-        $controller = Runner::getInstance($controllerName);
-        $action     = $actionName;
-
+    /**
+     * Call requested controller instance Action
+     *
+     * @param $controller
+     * @param $action
+     * @throws Runner coreException
+     */
+    public static function callControllerMethod($controller, $action)
+    {
         if (method_exists($controller, $action)) {
             $controller->$action();
         } else {
@@ -70,6 +118,14 @@ class Route
         }
     }
 
-
-
+    /**
+     * Check if controller class exist in filesystem
+     *
+     * @param $controllerPath
+     * @return bool
+     */
+    public static function isControllerExist($controllerPath)
+    {
+       return file_exists($controllerPath);
+    }
 }
