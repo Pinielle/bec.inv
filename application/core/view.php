@@ -23,12 +23,12 @@ class View
 
         $themePath = Runner::getInstance('Helper')->getSkinDirectoryPath() . self::THEME_PREFIX . 'default';
 
-        if(!file_exists($themePath.'/templates/' . $template.'.phtml')) {
+        if(!file_exists($themePath.'/templates/' . $template. Route::TEMPLATE_EXTENSION)) {
             Runner::coreException('Template file not exits');
             die();
         }
 
-        return $themePath.'/templates/' . $template.'.phtml';
+        return $themePath . '/templates/' . $template . Route::TEMPLATE_EXTENSION;
     }
 
 

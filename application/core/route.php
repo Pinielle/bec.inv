@@ -16,6 +16,12 @@ class Route
     /** default controller path */
     const CONTROLLERS_PATH = 'application/controllers/';
 
+    /** Controllers file extension */
+    const INSTANCE_EXTENSION = '.php';
+
+    /** Templates file extension */
+    const TEMPLATE_EXTENSION = '.phtml';
+
     /**
      * Main route method
      *
@@ -33,11 +39,9 @@ class Route
         $controllerFile = strtolower(Route::setRequestController($routes)) . '.php';
         $controllerPath = self::CONTROLLERS_PATH . $controllerFile;
 
-        if (Route::isControllerExist($controllerPath)) {
-            include self::CONTROLLERS_PATH . $controllerFile;
-        } else {
-            Runner::coreException("Routed file not exist");
-        }
+
+
+        Route::includeControllerInstance($controllerPath, $routes);
 
         /** Finally Call controller Action */
         Route::callControllerMethod(
@@ -127,5 +131,21 @@ class Route
     public static function isControllerExist($controllerPath)
     {
        return file_exists($controllerPath);
+    }
+
+    /**
+     * Include controller instance from file
+     *
+     * @param $controllerPath
+     * @param $routes
+     * @throws Runner coreException
+     */
+    public static function includeControllerInstance($controllerPath, $routes)
+    {
+        if (Route::isControllerExist($controllerPath)) {
+            include self::CONTROLLERS_PATH . strtolower(Route::setRequestController($routes)) . self::INSTANCE_EXTENSION;
+        } else {
+            Runner::coreException("Routed file not exist");
+        }
     }
 }
