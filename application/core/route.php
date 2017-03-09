@@ -39,8 +39,6 @@ class Route
         $controllerFile = strtolower(Route::setRequestController($routes)) . '.php';
         $controllerPath = self::CONTROLLERS_PATH . $controllerFile;
 
-
-
         Route::includeControllerInstance($controllerPath, $routes);
 
         /** Finally Call controller Action */

@@ -33,4 +33,9 @@ class Helper
         return new Config();
     }
 
+    public function getConnectorModel()
+    {
+        return new Connector();
+    }
+
 }

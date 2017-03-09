@@ -7,16 +7,30 @@
  */
 class Connector
 {
-    public function indexAction()
-    {
-        $server = "localhost";
-        $user = "root";
-        $pass = "mul2ler0";
-        $database = "bec_inv";
+    private $conn;
+    private $host;
+    private $database;
+    private $user;
+    private $pass;
 
-        $connectbd = mysql_connect($server,$user,$pass);
-        mysql_select_db($database);
 
-        return $connectbd;
+
+    public function __construct(){
+
+        $this->host = DB_HOSTNAME;
+        $this->database = DB_DATABASE;
+        $this->user = DB_USERNAME;
+        $this->pass = DB_PASSWORD;
+
+        $this->conn = new PDO("mysql:host=$this->host;dbname=$this->database", $this->user, $this->pass);
     }
+
+    /**
+     * @return PDO
+     */
+    public function getConn()
+    {
+        return $this->conn;
+    }
+
 }

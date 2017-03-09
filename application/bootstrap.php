@@ -9,6 +9,7 @@ require_once 'core/route.php';
 require_once 'core/session.php';
 require_once 'core/connector.php';
 require_once 'Runner.php';
+require_once 'config.php';
 
 /** find .css .js in uri */
 $isCss = strripos($_SERVER['REQUEST_URI'], '.css');

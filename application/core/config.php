@@ -21,4 +21,10 @@ class Config
     {
         return $themeName;
     }
+
+    public function getConfig()
+    {
+        include "/var/www/bec.inv/config.php";
+
+    }
 }
