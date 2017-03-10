@@ -1,5 +1,5 @@
 /* BASICS */
-
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 html, address,
 blockquote,
 body, dd, div,
@@ -78,119 +78,212 @@ BDO[DIR="rtl"]  { direction: rtl; unicode-bidi: bidi-override }
     h4, h5, h6    { page-break-after: avoid }
     ul, ol, dl    { page-break-before: avoid }
 }
-/* BASICS */
 
 body {
-    max-width: 1096px;
-    margin: 10px auto;
-    font-family: "Arial Black";
+    background-image: url("https://i0.wp.com/exploretheme.com/wp-content/uploads/2015/03/brickwall.jpg");
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
+/* NAV */
+.nav ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+.nav li {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2em;
+    line-height: 40px;
+    height: 40px;
+    border-bottom: 1px solid #888;
+    background-color: #ffffff;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #000000;
+    display: block;
+    transition: .3s background-color;
+}
+
+.nav a:hover {
+    background-color: #005f5f;
+}
+
+.nav a.active {
+    background-color: #fff;
+    color: #444;
+    cursor: default;
+}
+
+@media screen and (min-width: 600px) {
+    .nav li {
+        width: 120px;
+        border-bottom: none;
+        height: 50px;
+        line-height: 50px;
+        font-size: 1.4em;
+    }
+
+    /* Option 1 - Display Inline */
+    .nav li {
+        display: inline-block;
+        margin-right: -4px;
+    }
+
+    /* Options 2 - Float
+    .nav li {
+      float: left;
+    }
+    .nav ul {
+      overflow: auto;
+      width: 600px;
+      margin: 0 auto;
+    }
+    .nav {
+      background-color: #444;
+    }
+    */
+}
+
+/* NAV */
+
+.wrapper {
+    max-width: 1096px;
+    height: 100%;
+    border: 1px solid black;
+    margin: 0 auto;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 18px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 18px -5px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 18px -5px rgba(0,0,0,0.75);
+
+}
+
+.info {
+    float: left;
+    padding-left: 10px;
+    font-size: 24px;
+    line-height: 50px;
+}
+
+.user-status {
+    float: left;
+    padding-left: 20px;
+    font-size: 24px;
+    line-height: 50px;
+}
+
+.logged-bar {
+    float: right;
+    padding-right: 20px;
+    font-size: 24px;
+}
+
+.logged-bar a {
+    margin-left: 15px;
+}
+
+.title {
+    text-align: center;
+    color: #003211;
+}
+
+/* BASICS */
+
+/* LOGIN FORM */
+.login-page {
+    width: 360px;
+    padding: 3% 0 0;
+    margin: auto;
+}
+.form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+    background: #43A047;
+}
+.form .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+}
+.form .message a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+.form .register-form {
+    display: none;
+}
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 300px;
+    margin: 0 auto;
+}
+.container:before, .container:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.container .info {
+    margin: 50px auto;
+    text-align: center;
+}
+.container .info h1 {
+    margin: 0 0 15px;
+    padding: 0;
+    font-size: 36px;
+    font-weight: 300;
+    color: #1a1a1a;
+}
+.container .info span {
+    color: #4d4d4d;
+    font-size: 12px;
+}
+.container .info span a {
+    color: #000000;
+    text-decoration: none;
+}
+.container .info span .fa {
+    color: #EF3B3A;
+}
+/* LOGIN FORM END */
 
 .centered-text {
     text-align: center;
-}
-
-/* =============== Login form styles ============== */
-
-form {
-    border: 3px solid #f1f1f1;
-}
-
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-.cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
-}
-
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-}
-
-img.avatar {
-    width: 25%;
-    border-radius: 50%;
-}
-
-.container {
-    padding: 16px;
-    width: 500px;
-    margin: 0 auto;
-}
-
-span.psw {
-    float: right;
-    padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-        display: block;
-        float: none;
-    }
-    .cancelbtn {
-        width: 100%;
-    }
-}
-
-/* =============== Login form styles ============== */
-
-/* =============== NAVIGATION STYLES ============== */
-
-.navigation ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    text-align: center;
-}
-
-.navigation li {
-    display: inline-block;
-}
-
-.navigation li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-.navigation li a:hover {
-    background-color: #111;
-}
-
-.active {
-    background-color: #4CAF50;
-}
-/* =============== END NAVIGATION STYLES ============== */
-
-.content {
-    max-width: 1096px;
-    padding: 10px;
-    margin: 5px;
-    height: 700px;
-    border: 1px dotted #000000;
 }

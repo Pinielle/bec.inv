@@ -13,16 +13,6 @@ class Controller_Index extends Controller
      */
     public function indexAction()
     {
-        $sql = 'SELECT * FROM settings';
-        $conn_a = new Connector();
-        $conn=$conn_a->getConn();
-        foreach ($conn->query($sql) as $row)
-        {
-
-            print $row['title'] . "<br>\t";
-            print $row['text'] . "<br>\t";
-            print $row['page'] . "<br>\n";
-        }
         Runner::getInstance('Connector');
         Runner::getInstance('View')->renderTemplate('header');
         Runner::getInstance('View')->renderTemplate('index');

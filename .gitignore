@@ -6,3 +6,7 @@
 /.idea/
 /.phpstorm.meta.php
 /.htaccess
+skins/theme_default/images/
+application/config.php
+.idea/workspace.xml
+
