@@ -81,8 +81,9 @@ class View
         return Runner::getCopyright();
     }
 
-    public function getFormAction()
-    {
 
+    public function getControllerLocation()
+    {
+        return Runner::getInstance('Controller')->controllerLocationAction();
     }
 }

@@ -11,10 +11,18 @@ require_once 'core/connector.php';
 require_once 'Runner.php';
 require_once 'config.php';
 
+/** initialize Session */
+Runner::getInstance('Session')->init();
+
 /** find .css .js in uri */
 $isCss = strripos($_SERVER['REQUEST_URI'], '.css');
 $isJs  = strripos($_SERVER['REQUEST_URI'], '.js');
 
+
+if(DEBUG_MODE) {
+    ini_set('display_errors',1);
+    error_reporting(E_ALL);
+}
 
 /** If file extension exist, directly include it without run()  */
 /** TODO: Need to refactor in future.Temporary solution */

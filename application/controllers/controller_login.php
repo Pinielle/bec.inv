@@ -9,18 +9,23 @@ class Controller_Login extends Controller
 {
     public function indexAction()
     {
-        if(Runner::getInstance('Models/Model_Login')->getPost()) {
-            $this->postAction();
+        $viewModel = Runner::getInstance('View');
+        if(Runner::isPost()) {
+            $postData = Runner::getPost();
         }
 
-        Runner::getInstance('View')->renderTemplate('header');
-        if(Runner::getInstance('Models/Model_Login')->isUserLoggedIn())
-        {
-            Runner::getInstance('View')->renderTemplate('inventory');
-        } else {
-            Runner::getInstance('View')->renderTemplate('login');
+        if(isset($postData['register'])) {
+            echo 1;
         }
-        Runner::getInstance('View')->renderTemplate('footer');
+
+        $viewModel->renderTemplate('header');
+        if(Runner::getInstance('Session')->getLoggedIn())
+        {
+            $viewModel->renderTemplate('inventory');
+        } else {
+            $viewModel->renderTemplate('login');
+        }
+        $viewModel->renderTemplate('footer');
     }
 
     public function postAction()
@@ -45,6 +50,19 @@ class Controller_Login extends Controller
     private function setUserLoggedIn($customerId)
     {
         Runner::getInstance('Session')->startNewUserSession($customerId);
+    }
+
+    public function registerAction()
+    {
+        $viewModel = Runner::getInstance('View');
+        $viewModel->renderTemplate('header');
+        if(Runner::getInstance('Session')->getLoggedIn())
+        {
+            $viewModel->renderTemplate('inventory');
+        } else {
+            $viewModel->renderTemplate('register');
+        }
+        $viewModel->renderTemplate('footer');
     }
 
 }

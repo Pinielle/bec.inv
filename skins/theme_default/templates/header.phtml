@@ -7,4 +7,7 @@
 </head>
 <body>
 <div class="centered-text"><h1>BeC Internal Resource</h1></div>
-<div class="navigation"><?php echo $this->renderTemplate('navigation'); ?></div>
+<?php if (Runner::getInstance('Session')->getLoggedIn()) : ?>
+    <div class="navigation"><?php echo $this->renderTemplate('navigation'); ?></div>
+<?php endif; ?>
+

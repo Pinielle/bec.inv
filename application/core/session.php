@@ -8,44 +8,42 @@
 
 class Session
 {
-    public static function startNewUserSession($customerId)
+    public function init()
     {
-        Session::unsetSession();
-        Session::startSession();
-
-        $_SESSION['CREATED'] = $_SERVER['REQUEST_TIME'];
-        $_SESSION['CUSTOMER_ID'] = $customerId;
-        $_SESSION['customer_logged_in'] = true;
-    }
-
-    protected function unsetSession()
-    {
-        if(isset($_SESSION)) {
-            unset($_SESSION['customer_id'], $_SESSION['customer_logged_in']);
-            session_destroy();
-            header('Location: index.php');
+        $this->startSession();
+        var_dump($_SESSION);
+        if (isset($_SESSION['time']) && $_SESSION['time'] < time()) {
+            $this->unsetSession();
         }
     }
 
     protected function startSession()
     {
-        session_set_cookie_params(Session::getSessionLifeTime(),"/");
+
+        session_set_cookie_params(SESSION_LIFETIME);
+        $_SESSION = array();
+        $_SESSION['id']    = $this->getCoockieSessionName();
+        $_SESSION['user'] = 'guest';
+        $_SESSION['logged_in'] = false;
+        $_SESSION['time'] = time() + SESSION_LIFETIME;
+    }
+
+    protected function unsetSession()
+    {
+        session_destroy();
         session_start();
         $_SESSION = array();
     }
 
-    protected function getSessionLifeTime()
+    public function getCoockieSessionName()
     {
-        return ini_get("session.gc_maxlifetime");
+        return $_COOKIE['PHPSESSID'];
     }
 
-    protected function regenerateSession()
+    public function getLoggedIn()
     {
-        if (!isset($_SESSION['CREATED'])) {
-            $_SESSION['CREATED'] = time();
-        } else if (time() - $_SESSION['CREATED'] > 1800) {
-            session_regenerate_id(true);
-            $_SESSION['CREATED'] = time();
-        }
+        return $_SESSION['logged_in'];
     }
+
+
 }

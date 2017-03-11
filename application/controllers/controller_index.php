@@ -13,10 +13,15 @@ class Controller_Index extends Controller
      */
     public function indexAction()
     {
-        Runner::getInstance('Connector');
-        Runner::getInstance('View')->renderTemplate('header');
-        Runner::getInstance('View')->renderTemplate('index');
-        Runner::getInstance('View')->renderTemplate('footer');
+
+        $viewInstance = Runner::getInstance('View');
+        $viewInstance->renderTemplate('header');
+        if(Runner::getInstance('Session')->getLoggedIn()) {
+            $viewInstance->renderTemplate('index');
+        } else {
+            Runner::redirect('login');
+        }
+        $viewInstance->renderTemplate('footer');
 
     }
 }

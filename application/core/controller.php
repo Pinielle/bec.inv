@@ -9,10 +9,6 @@
 class Controller
 {
 
-    function indexAction()
-    {
-    }
-
     protected function getPostAction()
     {
         return $_POST;
