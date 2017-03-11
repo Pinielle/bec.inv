@@ -1,3 +1,9 @@
 <div class="centered-text"><span><?php echo $this->getCopyright() ?></span></div>
 </body>
 </html>
+<?php
+/** unset error Message variable */
+if (isset($errorMessages)) {
+    unset($errorMessages);
+}
+?>

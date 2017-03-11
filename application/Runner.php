@@ -120,4 +120,23 @@ final class Runner
     }
 
 
+    /**
+     * Method for capturing and transfer front error messages. If type param not passed, method argument "type"
+     * became as @elert.
+     *
+     * Requires 3 parameters:
+     * @param string $errors - Text of exception, can be array() if you have several texts in one method
+     * @param string $template - template to render, can be specified.
+     * @param string $type type of notification. Should be only @alert, @success, @info, @warning.
+     */
+    public static function errorPage($errors = null, $template = '', $type = 'alert')
+    {
+        global $errorMessages;
+        $errorMessages = $errors;
+        $errorMessages['type'] = $type;
+        Runner::getInstance('View')->renderTemplate('header');
+        Runner::getInstance('View')->renderTemplate($template);
+        Runner::getInstance('View')->renderTemplate('footer');
+    }
+
 }

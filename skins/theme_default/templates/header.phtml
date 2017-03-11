@@ -1,3 +1,18 @@
+<?php /** Define global variable $errorMessages for passing exception texts if needed */ ?>
+<?php global $errorMessages; ?>
+
+<?php
+/** $typeStyle a variable that defines the style of output exception messages.
+ * See final class Runner->errorPage() 
+ */
+?>
+<?php $typeStyle = false; ?>
+
+<?php if (isset($errorMessages['type'])) {
+    $typeStyle = $errorMessages['type'];
+    unset($errorMessages['type']);
+}
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -9,5 +24,16 @@
 <div class="centered-text"><h1>BeC Internal Resource</h1></div>
 <?php if (Runner::getInstance('Session')->getLoggedIn()) : ?>
     <div class="navigation"><?php echo $this->renderTemplate('navigation'); ?></div>
+<?php endif; ?>
+
+<?php
+/** If you planned add something to this template in future, please leave this code in the end of template. */
+if (!empty($errorMessages)) : ?>
+    <?php foreach ($errorMessages as $error) : ?>
+        <div class="alert <?php echo $typeStyle; ?>">
+            <span class="closebtn">&times;</span>
+            <strong> <?php echo $error; ?></strong>
+        </div>
+    <?php endforeach; ?>
 <?php endif; ?>
 

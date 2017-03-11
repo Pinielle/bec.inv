@@ -65,4 +65,35 @@ class Controller_Login extends Controller
         $viewModel->renderTemplate('footer');
     }
 
+    public function registerPostAction()
+    {
+        // $connectorInstance = Runner::getInstance('Connector');
+        $errors = array();
+
+
+       if(Runner::isPost()) {
+           $postData  = Runner::getPost();
+           $email     = $postData['email'];
+           $firstName = $postData['firstname'];
+           $lastName  = $postData['lastname'];
+           $password  = $postData['password'];
+
+           if(!$email) {
+               $errors[] = 'Email is a required field';
+           }
+            if(!$password) {
+                $errors[] = 'Password is a required field';
+            }
+
+            if ($errors) {
+                $this->errorAction($errors, 'register');
+            }
+       }
+    }
+
+    public function errorAction($errors = '', $template = '', $type = 'alert')
+    {
+        Runner::errorPage($errors, $template, $type);
+    }
+
 }
