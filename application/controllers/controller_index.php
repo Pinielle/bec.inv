@@ -14,6 +14,7 @@ class Controller_Index extends Controller
     public function indexAction()
     {
 
+
         $viewInstance = Runner::getInstance('View');
         $viewInstance->renderTemplate('header');
         if(Runner::getInstance('Session')->getLoggedIn()) {
@@ -23,5 +24,13 @@ class Controller_Index extends Controller
         }
         $viewInstance->renderTemplate('footer');
 
-    }
+
+
+
+        Runner::getInstance('Connector');
+        Runner::getInstance('View')->renderTemplate('header');
+        Runner::getInstance('View')->renderTemplate('index');
+        Runner::getInstance('View')->renderTemplate('footer');
+
+            }
 }
