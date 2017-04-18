@@ -9,6 +9,8 @@ class Controller_Login extends Controller
 {
     public function indexAction()
     {
+        $qwerty = new Model_Login();
+       // $qwerty->getCustomer();
         $viewModel = Runner::getInstance('View');
         if(Runner::isPost()) {
             $postData = Runner::getPost();
@@ -95,5 +97,7 @@ class Controller_Login extends Controller
     {
         Runner::errorPage($errors, $template, $type);
     }
+
+
 
 }

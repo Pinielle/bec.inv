@@ -32,5 +32,5 @@ class Controller_Index extends Controller
         Runner::getInstance('View')->renderTemplate('index');
         Runner::getInstance('View')->renderTemplate('footer');
 
-            }
+    }
 }

@@ -6,6 +6,7 @@
  * Date: 09.02.17
  * Time: 12:44
  */
+
 class Controller
 {
 
@@ -18,5 +19,6 @@ class Controller
     {
         return Runner::getPostData($data);
     }
+
 
 }

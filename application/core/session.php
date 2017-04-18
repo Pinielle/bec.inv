@@ -11,7 +11,6 @@ class Session
     public function init()
     {
         $this->startSession();
-        var_dump($_SESSION);
         if (isset($_SESSION['time']) && $_SESSION['time'] < time()) {
             $this->unsetSession();
         }
@@ -24,6 +23,7 @@ class Session
         $_SESSION = array();
         $_SESSION['id']    = $this->getCoockieSessionName();
         $_SESSION['user'] = 'guest';
+        $_SESSION['acl'] = '0';
         $_SESSION['logged_in'] = false;
         $_SESSION['time'] = time() + SESSION_LIFETIME;
     }

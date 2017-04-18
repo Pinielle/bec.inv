@@ -6,8 +6,7 @@
  * Date: 13.02.17
  * Time: 12:40
  */
-class Model_Login extends Model
+class Inventory extends Connector
 {
-    protected $_table = 'users';
 
 }

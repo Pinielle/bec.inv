@@ -1,47 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ihor
- * Date: 09.02.17
- * Time: 17:27
- */
+class qwe
+{
+    public function selectAll()
+    {
+        $sql = "SELECT * FROM $this->_table";
+        $result = $this->db->query($sql);
 
-    class User {
-
-        protected $permission = array(
-
-            'user_controller' => array('view_action')
-        );
-
-        function login($login){
-
-        }
-
-        function checkPermission($permission){
-            if (isset($permission['SU'])){
-                return true;
-            }
-            return false;
-        }
-
-        function logOut(){
-
+        while ($user = $result->fetch(PDO::FETCH_ASSOC)) {
+            echo "{$user['id']}.username:{$user['email']}, password: {$user['password']}";
         }
     }
-    class Admin extends User {
-
-        /*protected $permission = array(
-
-            'user_controller' => array('view_action','create_action','change_action','delete_action','print_action')
-        );*/
-        public function __construct()
-        {
-            $this->permission['user_controller']=array_merge($this->permission['user_controller'],
-                array('create_action','change_action','delete_action','print_action'));
-        }
-
-    }
-
-    $user = new User();
-    $admin = new Admin();
-    var_dump($user,$admin);
+}
